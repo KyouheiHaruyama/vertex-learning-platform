@@ -1,37 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vertex
 
-## Getting Started
+An AI-powered learning platform. Authors create courses in Sanity; a Next.js
+site serves them to learners. Search returns ranked cards that link to the exact
+second in a lesson video where a topic is taught.
 
-First, run the development server:
+## Workspaces
+
+This repo holds two standalone workspaces. They deploy independently and each
+manages its own dependencies — there is no workspace tooling at the root.
+
+| Path      | What it is                                            | Dev server |
+|-----------|-------------------------------------------------------|------------|
+| `web/`    | Next.js app: pages, search UI, server-side integration | `:3000`    |
+| `studio/` | Sanity Studio: schema and content authoring            | `:3333`    |
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 1. Environment. Copy the canonical list and fill in the values.
+cp .env.example web/.env.local     # then delete the studio-only lines
+cp studio/.env.example studio/.env
+
+# 2. Install
+npm --prefix web install
+npm --prefix studio install
+
+# 3. Run (separate terminals)
+npm --prefix web run dev           # http://localhost:3000
+npm --prefix studio run dev        # http://localhost:3333
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The dataset is private, so `web` needs a Sanity **Viewer** token in
+`SANITY_API_READ_TOKEN`. Create one at
+<https://www.sanity.io/manage> → your project → API → Tokens.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Types
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+TypeGen lives in the Studio and writes into the web app:
 
-## Learn More
+```bash
+npm --prefix studio run typegen    # schema.json + web/sanity.types.ts
+```
 
-To learn more about Next.js, take a look at the following resources:
+`sanity dev` regenerates them automatically as queries change, so you rarely
+need to run this by hand. Both `studio/schema.json` and `web/sanity.types.ts`
+are committed.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Checks
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+cd web && npx tsc --noEmit && npm run lint && npm run build
+cd studio && npx tsc --noEmit
+```
 
-## Deploy on Vercel
+## Conventions
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# vertex-learning-platform
+See `AGENTS.md` for the architecture rules this project is built to, and
+`prompts/` for the implementation prompt behind each change.
