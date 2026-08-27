@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/cn";
 
 export type ButtonVariant = "primary" | "secondary" | "tertiary" | "text";
-export type ButtonSize = "md" | "lg";
+export type ButtonSize = "md" | "lg" | "hero";
 export type ButtonState = "default" | "hover" | "disabled";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -46,9 +46,32 @@ const variantStyles: Record<ButtonVariant, Record<ButtonState, string>> = {
 };
 
 const sizes: Record<ButtonSize, string> = {
+  /* Home hero: 60px tall, 18px label. */
+  hero: "h-15 gap-6 px-6 text-[18px]",
   lg: "h-11 px-4 text-[16px]",
   md: "h-11 px-3 text-[14px]",
 };
+
+/** Button styling as a class string, for when the control must be a link. */
+export function buttonClasses({
+  variant = "primary",
+  size = "lg",
+  state = "default",
+  className,
+}: {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  state?: ButtonState;
+  className?: string;
+} = {}) {
+  return cn(
+    base,
+    variantStyles[variant][state],
+    variant === "text" ? "h-11 px-0 text-[14px]" : sizes[size],
+    state === "disabled" && "cursor-not-allowed",
+    className,
+  );
+}
 
 export function Button({
   variant = "primary",
@@ -66,13 +89,12 @@ export function Button({
     <button
       type={type}
       disabled={isDisabled}
-      className={cn(
-        base,
-        variantStyles[variant][resolvedState],
-        variant === "text" ? "h-11 px-0 text-[14px]" : sizes[size],
-        isDisabled && "cursor-not-allowed",
+      className={buttonClasses({
+        variant,
+        size,
+        state: resolvedState,
         className,
-      )}
+      })}
       {...props}
     />
   );

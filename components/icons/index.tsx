@@ -241,6 +241,23 @@ export function ChevronRightFilledIcon(props: IconProps) {
   );
 }
 
+export function ArrowRightIcon(props: IconProps) {
+  return (
+    <Outline {...props}>
+      <path d="M4 12h15.5" />
+      <path d="m13.5 6 6 6-6 6" />
+    </Outline>
+  );
+}
+
+export function StarIcon(props: IconProps) {
+  return (
+    <Outline {...props}>
+      <path d="m12 3.4 2.7 5.5 6 .9-4.35 4.25 1.03 6L12 17.25 6.62 20.05l1.03-6L3.3 9.8l6-.9L12 3.4Z" />
+    </Outline>
+  );
+}
+
 export function ChevronLeftIcon(props: IconProps) {
   return (
     <Outline {...props}>

@@ -1,17 +1,27 @@
 import { cn } from "@/lib/cn";
 
+export type LogoSize = "sm" | "lg";
+
 export interface LogoProps {
   className?: string;
+  size?: LogoSize;
   /** Hide the wordmark and show the mark only. */
   markOnly?: boolean;
 }
 
-export function Logo({ className, markOnly = false }: LogoProps) {
+const sizes: Record<LogoSize, { mark: number; wordmark: string; gap: string }> = {
+  sm: { mark: 24, wordmark: "text-[18px]", gap: "gap-2" },
+  lg: { mark: 32, wordmark: "text-[24px]", gap: "gap-3" },
+};
+
+export function Logo({ className, size = "sm", markOnly = false }: LogoProps) {
+  const { mark, wordmark, gap } = sizes[size];
+
   return (
-    <span className={cn("inline-flex items-center gap-2", className)}>
+    <span className={cn("inline-flex items-center", gap, className)}>
       <svg
-        width="24"
-        height="24"
+        width={mark}
+        height={mark}
         viewBox="0 0 24 24"
         fill="none"
         aria-hidden="true"
@@ -26,7 +36,10 @@ export function Logo({ className, markOnly = false }: LogoProps) {
       {!markOnly && (
         <span
           aria-hidden="true"
-          className="text-[18px] font-semibold tracking-tight text-neutral-900"
+          className={cn(
+            "font-semibold tracking-tight text-neutral-900",
+            wordmark,
+          )}
         >
           Vertex
         </span>
