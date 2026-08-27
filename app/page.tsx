@@ -1,11 +1,12 @@
+import {
+  Show,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import {
-  ArrowRightIcon,
-  BellIcon,
-  StarIcon,
-  UserIcon,
-} from "@/components/icons";
+import { ArrowRightIcon, BellIcon, StarIcon } from "@/components/icons";
 import { buttonClasses } from "@/components/ui/button";
 import { HomeCourseCard } from "@/components/ui/home-course-card";
 import { SearchInput } from "@/components/ui/input";
@@ -45,13 +46,31 @@ function SiteHeader() {
           >
             <BellIcon size={24} />
           </button>
-          <span
-            aria-label="Your account"
-            role="img"
-            className="flex size-10 items-center justify-center rounded-full border border-neutral-200 bg-neutral-100 text-neutral-500"
-          >
-            <UserIcon size={22} />
-          </span>
+          <Show when="signed-out">
+            <div className="flex items-center gap-3">
+              <SignInButton>
+                <button
+                  type="button"
+                  className={buttonClasses({ variant: "tertiary", size: "md" })}
+                >
+                  Sign in
+                </button>
+              </SignInButton>
+              <SignUpButton>
+                <button
+                  type="button"
+                  className={buttonClasses({ variant: "primary", size: "md" })}
+                >
+                  Sign up
+                </button>
+              </SignUpButton>
+            </div>
+          </Show>
+          <Show when="signed-in">
+            <UserButton
+              appearance={{ elements: { avatarBox: "size-10" } }}
+            />
+          </Show>
         </>
       }
     />
