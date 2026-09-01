@@ -22,13 +22,17 @@ cp .env.example web/.env.local     # then delete the studio-only lines
 cp studio/.env.example studio/.env
 
 # 2. Install
-npm --prefix web install
-npm --prefix studio install
+npm run install:all
 
 # 3. Run (separate terminals)
-npm --prefix web run dev           # http://localhost:3000
-npm --prefix studio run dev        # http://localhost:3333
+npm run dev                        # web  — http://localhost:3000
+npm run dev:studio                 # studio — http://localhost:3333
 ```
+
+The root `package.json` holds convenience scripts only. It is deliberately
+**not** an npm workspace root — `web/` and `studio/` install and deploy on
+their own, which is what keeps Studio auto-updates and TypeGen working.
+Everything is also runnable from inside each folder.
 
 The dataset is private, so `web` needs a Sanity **Viewer** token in
 `SANITY_API_READ_TOKEN`. Create one at
@@ -39,7 +43,7 @@ The dataset is private, so `web` needs a Sanity **Viewer** token in
 TypeGen lives in the Studio and writes into the web app:
 
 ```bash
-npm --prefix studio run typegen    # schema.json + web/sanity.types.ts
+npm run typegen                    # schema.json + web/sanity.types.ts
 ```
 
 `sanity dev` regenerates them automatically as queries change, so you rarely
@@ -49,8 +53,9 @@ are committed.
 ## Checks
 
 ```bash
-cd web && npx tsc --noEmit && npm run lint && npm run build
-cd studio && npx tsc --noEmit
+npm run typecheck                  # both workspaces
+npm run lint
+npm run build
 ```
 
 ## Conventions

@@ -1,0 +1,17 @@
+{
+  "name": "vertex",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Convenience scripts only. web/ and studio/ are standalone workspaces that manage their own dependencies — this is deliberately not an npm workspace root.",
+  "scripts": {
+    "dev": "npm --prefix web run dev",
+    "dev:web": "npm --prefix web run dev",
+    "dev:studio": "npm --prefix studio run dev",
+    "build": "npm --prefix web run build",
+    "build:studio": "npm --prefix studio run build",
+    "lint": "npm --prefix web run lint",
+    "typecheck": "(cd web && npx tsc --noEmit) && (cd studio && npx tsc --noEmit)",
+    "typegen": "npm --prefix studio run typegen",
+    "install:all": "npm --prefix web install && npm --prefix studio install"
+  }
+}
