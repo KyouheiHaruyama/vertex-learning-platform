@@ -4,11 +4,18 @@ export interface ProgressBarProps {
   /** Completion between 0 and 100. */
   value: number;
   label?: string;
+  /** Set false when the caller prints the percentage itself. */
+  showValue?: boolean;
   className?: string;
 }
 
 /* 11 PROGRESS BAR */
-export function ProgressBar({ value, label, className }: ProgressBarProps) {
+export function ProgressBar({
+  value,
+  label,
+  showValue = true,
+  className,
+}: ProgressBarProps) {
   const clamped = Math.min(100, Math.max(0, Math.round(value)));
 
   return (
@@ -26,10 +33,12 @@ export function ProgressBar({ value, label, className }: ProgressBarProps) {
           style={{ width: `${clamped}%` }}
         />
       </div>
-      <p className="text-body whitespace-nowrap text-neutral-500">
-        <span className="font-semibold text-neutral-900">{clamped}%</span>{" "}
-        complete
-      </p>
+      {showValue && (
+        <p className="text-body whitespace-nowrap text-neutral-500">
+          <span className="font-semibold text-neutral-900">{clamped}%</span>{" "}
+          complete
+        </p>
+      )}
     </div>
   );
 }

@@ -18,13 +18,22 @@ const courseCardFields = /* groq */ `
   instructor->{ _id, name, "slug": slug.current },
   category->{ _id, title, "slug": slug.current },
   "moduleCount": count(modules),
-  "lessonCount": count(modules[].lessons[])
+  "lessonCount": count(modules[].lessons[]),
+  "totalSeconds": math::sum(modules[].lessons[]->duration)
 `;
 
 /** Catalog listing, most recently created first with popular courses on top. */
 export const COURSES_QUERY = defineQuery(/* groq */ `
   *[_type == "course" && defined(slug.current)]
     | order(popular desc, _createdAt desc) {
+      ${courseCardFields}
+    }
+`);
+
+/** The three cards the home page shows, sharing the catalog's ordering. */
+export const HOME_COURSES_QUERY = defineQuery(/* groq */ `
+  *[_type == "course" && defined(slug.current)]
+    | order(popular desc, _createdAt desc)[0...3] {
       ${courseCardFields}
     }
 `);
@@ -42,7 +51,7 @@ export const COURSE_BY_SLUG_QUERY = defineQuery(/* groq */ `
         _id,
         title,
         "slug": slug.current,
-        durationSeconds,
+        duration,
         freePreview
       }
     }
@@ -60,14 +69,14 @@ export const LESSON_BY_SLUG_QUERY = defineQuery(/* groq */ `
     title,
     "slug": slug.current,
     videoUrl,
-    poster,
-    durationSeconds,
+    thumbnail,
+    duration,
     freePreview,
     studentCount,
     keyPoints,
     notes,
     proTip,
-    resources[]{ _key, kind, title, description, url },
+    resources[]{ _key, type, title, description, url },
     "course": *[_type == "course" && references(^._id)][0] {
       _id,
       title,

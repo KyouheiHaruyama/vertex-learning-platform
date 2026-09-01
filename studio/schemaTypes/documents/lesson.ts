@@ -43,8 +43,8 @@ export const lesson = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "poster",
-      title: "Poster",
+      name: "thumbnail",
+      title: "Thumbnail",
       description: "Thumbnail shown before playback and in search results.",
       type: "image",
       group: "video",
@@ -59,7 +59,7 @@ export const lesson = defineType({
       ],
     }),
     defineField({
-      name: "durationSeconds",
+      name: "duration",
       title: "Duration (seconds)",
       description: "Runtime of the lesson video. Formatted for display by the frontend.",
       type: "number",
@@ -157,9 +157,9 @@ export const lesson = defineType({
   preview: {
     select: {
       title: "title",
-      duration: "durationSeconds",
+      duration: "duration",
       freePreview: "freePreview",
-      media: "poster",
+      media: "thumbnail",
     },
     prepare({ title, duration, freePreview, media }) {
       const minutes = typeof duration === "number" ? Math.round(duration / 60) : null;
