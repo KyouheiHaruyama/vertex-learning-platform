@@ -7,11 +7,12 @@ export const resource = defineType({
   type: "object",
   fields: [
     defineField({
-      name: "kind",
-      title: "Kind",
+      name: "type",
+      title: "Type",
       type: "string",
       options: {
         list: [
+          { title: "Link", value: "link" },
           { title: "PDF", value: "pdf" },
           { title: "Article", value: "article" },
           { title: "Repository", value: "repository" },
@@ -43,6 +44,6 @@ export const resource = defineType({
     }),
   ],
   preview: {
-    select: { title: "title", subtitle: "kind" },
+    select: { title: "title", subtitle: "type" },
   },
 });

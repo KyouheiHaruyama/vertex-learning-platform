@@ -12,11 +12,15 @@
             "value": "resource"
           }
         },
-        "kind": {
+        "type": {
           "type": "objectAttribute",
           "value": {
             "type": "union",
             "of": [
+              {
+                "type": "string",
+                "value": "link"
+              },
               {
                 "type": "string",
                 "value": "pdf"
@@ -85,27 +89,35 @@
             "of": [
               {
                 "type": "string",
-                "value": "chart"
+                "value": "layers"
               },
               {
                 "type": "string",
-                "value": "clock"
+                "value": "workflow"
               },
               {
                 "type": "string",
-                "value": "document"
+                "value": "gauge"
               },
               {
                 "type": "string",
-                "value": "play"
+                "value": "rocket"
               },
               {
                 "type": "string",
-                "value": "bookmark"
+                "value": "sparkles"
               },
               {
                 "type": "string",
-                "value": "target"
+                "value": "shield"
+              },
+              {
+                "type": "string",
+                "value": "puzzle"
+              },
+              {
+                "type": "string",
+                "value": "code"
               }
             ]
           },
@@ -297,7 +309,7 @@
         },
         "optional": true
       },
-      "poster": {
+      "thumbnail": {
         "type": "objectAttribute",
         "value": {
           "type": "object",
@@ -351,7 +363,7 @@
         },
         "optional": true
       },
-      "durationSeconds": {
+      "duration": {
         "type": "objectAttribute",
         "value": {
           "type": "number"

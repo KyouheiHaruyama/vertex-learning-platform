@@ -360,3 +360,94 @@ export function AccessibilityIcon(props: IconProps) {
     </Outline>
   );
 }
+
+/* --- people -------------------------------------------------------------- */
+
+export function UsersIcon(props: IconProps) {
+  return (
+    <Outline {...props}>
+      <circle cx="9.2" cy="8" r="3.6" />
+      <path d="M2.8 20.2a6.4 6.4 0 0 1 12.8 0" />
+      <path d="M16.4 5a3.6 3.6 0 0 1 0 6.8" />
+      <path d="M18.2 14.4a6.4 6.4 0 0 1 3 5.8" />
+    </Outline>
+  );
+}
+
+/* --- learning outcome marks ---------------------------------------------- */
+
+export function LayersIcon(props: IconProps) {
+  return (
+    <Outline {...props}>
+      <path d="m12 2.8 9 4.6-9 4.6-9-4.6Z" />
+      <path d="m3 12.4 9 4.6 9-4.6" />
+      <path d="m3 16.9 9 4.6 9-4.6" />
+    </Outline>
+  );
+}
+
+export function WorkflowIcon(props: IconProps) {
+  return (
+    <Outline {...props}>
+      <rect x="3" y="3" width="7" height="6" rx="1.6" />
+      <rect x="14" y="15" width="7" height="6" rx="1.6" />
+      <path d="M6.5 9v6.4a2.6 2.6 0 0 0 2.6 2.6H14" />
+    </Outline>
+  );
+}
+
+export function GaugeIcon(props: IconProps) {
+  return (
+    <Outline {...props}>
+      <path d="M3.4 18.2a9.4 9.4 0 1 1 17.2 0" />
+      <path d="m12 18.2 4.2-6" />
+      <circle cx="12" cy="18.2" r="1.2" fill="currentColor" stroke="none" />
+    </Outline>
+  );
+}
+
+export function RocketIcon(props: IconProps) {
+  return (
+    <Outline {...props}>
+      <path d="M13.6 3.4c3.4 1.2 5.8 3.6 7 7-3.4 4.6-6.6 7-9.6 7.2l-4.6-4.6C6.6 10 9 6.8 13.6 3.4Z" />
+      <circle cx="14.9" cy="9.1" r="1.9" />
+      <path d="M6.4 13 3.6 15.9l4.5 4.5L11 17.6" />
+    </Outline>
+  );
+}
+
+export function SparklesIcon(props: IconProps) {
+  return (
+    <Outline {...props}>
+      <path d="M10 3.2 11.7 8l4.8 1.7-4.8 1.7L10 16.2 8.3 11.4 3.5 9.7 8.3 8Z" />
+      <path d="M17.6 14.2 18.5 17l2.8 1-2.8 1-.9 2.8-.9-2.8-2.8-1 2.8-1Z" />
+    </Outline>
+  );
+}
+
+export function ShieldIcon(props: IconProps) {
+  return (
+    <Outline {...props}>
+      <path d="M12 2.8 4.6 6v6c0 4.4 3 8 7.4 9.2 4.4-1.2 7.4-4.8 7.4-9.2V6Z" />
+      <path d="m9 11.9 2.2 2.2L15 10.3" />
+    </Outline>
+  );
+}
+
+export function PuzzleIcon(props: IconProps) {
+  return (
+    <Outline {...props}>
+      <path d="M9.6 3.4a2.1 2.1 0 0 1 4.2 0v1.3h3.1a1.4 1.4 0 0 1 1.4 1.4v3.1h1.3a2.1 2.1 0 0 1 0 4.2h-1.3v5.2a1.4 1.4 0 0 1-1.4 1.4h-5.2v-1.3a2.1 2.1 0 0 0-4.2 0v1.3H4.7a1.4 1.4 0 0 1-1.4-1.4v-5.2h1.3a2.1 2.1 0 0 0 0-4.2H3.3V6.1a1.4 1.4 0 0 1 1.4-1.4h4.9Z" />
+    </Outline>
+  );
+}
+
+export function CodeIcon(props: IconProps) {
+  return (
+    <Outline {...props}>
+      <path d="m8.4 8-4.6 4 4.6 4" />
+      <path d="m15.6 8 4.6 4-4.6 4" />
+      <path d="m13.4 4.6-2.8 14.8" />
+    </Outline>
+  );
+}
